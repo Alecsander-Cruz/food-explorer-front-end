@@ -3,7 +3,11 @@ import { Container } from "./styles";
 export function Input({ icon: Icon, ...rest }) {
     return (
         <Container>
-            {Icon && <Icon />}
+            {Icon && (
+                <button>
+                    <Icon />
+                </button>
+            )}
             <input {...rest} />
         </Container>
     );

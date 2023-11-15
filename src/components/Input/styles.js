@@ -10,6 +10,14 @@ export const Container = styled.div`
 
     border-radius: 0.57rem;
 
+    > button{
+        background: transparent;
+        border: none;
+        color: ${({ theme }) => theme.COLORS.LIGHT_300};
+        font-size: 1.15rem;
+
+    }
+
     > input {
         height: 3.4rem;
         width: 100%;
