@@ -29,7 +29,12 @@ export default {
         MINT_100: "#04d361",
 
         CAKE_100: "#065e7c",
-        CAKE_200: "#82f3ff"
+        CAKE_200: "#82f3ff",
+
+        GRADIENTS_100_0: "rgba(0, 10, 15, 0.2725)",
+        GRADIENTS_100_100: "rgba(0, 10, 15, 1)",
+        GRADIENTS_200_0: "rgba(9, 30, 38, 1)",
+        GRADIENTS_200_100: "rgba(0, 19, 28, 1)"
     },
     FONT: {
         POPPINS: {

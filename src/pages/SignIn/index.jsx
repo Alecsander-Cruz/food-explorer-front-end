@@ -17,9 +17,7 @@ export function SignIn() {
 
     function handleSignIn() {
         if (email && password) {
-            console.log("antes do signIn do Auth ser chamado!");
             signIn({ email, password });
-            console.log("depois do signIn do Auth ser chamado!");
         } else {
             return alert(
                 "Os campos precisam ser preenchidos para efetuar o login!"

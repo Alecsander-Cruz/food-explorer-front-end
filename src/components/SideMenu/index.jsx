@@ -1,14 +1,15 @@
-import { Container, Header, Button, Nav, FooterSpace } from "./styles";
+import { Container, Header, Button, Nav, FixedFooter } from "./styles";
 import { FiX } from "react-icons/fi";
-
-import { Footer } from "../Footer";
-import { Search } from "../Search";
-
-import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
 
+import { Search } from "../Search";
+import { Footer } from "../Footer";
+
+import { useAuth } from "../../hooks/auth";
+import { USER_ROLE } from "../../utils/roles.js";
+
 export function SideMenu({ menuIsOpen, onCloseMenu }) {
-    const { signOut } = useAuth();
+    const { signOut, user } = useAuth();
     const navigate = useNavigate();
 
     function handleSignOut() {
@@ -26,13 +27,19 @@ export function SideMenu({ menuIsOpen, onCloseMenu }) {
             </Header>
             <Nav>
                 <Search />
+                {[USER_ROLE.ADMIN].includes(user.role) && (
+                    <a href="#" data-menu-active="true">
+                        Novo Prato
+                    </a>
+                )}
+
                 <a href="#" data-menu-active="true" onClick={handleSignOut}>
                     Sair
                 </a>
             </Nav>
-            {/* <FooterSpace>
-                <Footer />
-            </FooterSpace> */}
+            <FixedFooter>
+                <Footer></Footer>
+            </FixedFooter>
         </Container>
     );
 }

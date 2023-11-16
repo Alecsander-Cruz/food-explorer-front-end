@@ -3,7 +3,9 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
+
+    background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
     grid-template-areas: "header" "content" "footer";
     grid-template-rows: 114px auto 78px;
@@ -65,6 +67,7 @@ export const Nav = styled.nav`
     width: 100%;
     height: 100%;
 
+
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -75,7 +78,8 @@ export const Nav = styled.nav`
     /* margin-left: 28px; */
     
     a {
-        padding-left: 10px;
+        padding: 10px 0 10px 10px ;
+
         margin-top: 36px;
 
 
@@ -87,7 +91,6 @@ export const Nav = styled.nav`
     }
 `
 
-export const FooterSpace = styled.footer`
+export const FixedFooter = styled.footer`
     grid-area: footer;
 `
-

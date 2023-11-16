@@ -1,4 +1,13 @@
-import { Container, Counter, Menu } from "./styles";
+import {
+    Container,
+    Counter,
+    Menu,
+    LogoAdmin,
+    LogoCustomer,
+    NewDish,
+    Orders,
+    Logout
+} from "./styles";
 import { SlMenu } from "react-icons/sl";
 import { MdHexagon } from "react-icons/md";
 import { PiReceipt } from "react-icons/pi";
@@ -9,8 +18,10 @@ import { useNavigate } from "react-router-dom";
 
 import { Search } from "../Search";
 
+import { USER_ROLE } from "../../utils/roles.js";
+
 export function Header({ onOpenMenu }) {
-    const { signOut } = useAuth();
+    const { signOut, user } = useAuth();
     const navigate = useNavigate();
 
     function handleSignOut() {
@@ -24,25 +35,44 @@ export function Header({ onOpenMenu }) {
                 <SlMenu className="menu" />
             </Menu>
 
-            <div className="logo">
-                <MdHexagon />
-                <strong>food explorer</strong>
-            </div>
+            {[USER_ROLE.ADMIN].includes(user.role) && (
+                <LogoAdmin>
+                    <MdHexagon />
+                    <div>
+                        <strong>food explorer</strong>
+                        <span>admin</span>
+                    </div>
+                </LogoAdmin>
+            )}
+
+            {[USER_ROLE.CUSTOMER].includes(user.role) && (
+                <LogoCustomer>
+                    <MdHexagon />
+                    <strong>food explorer</strong>
+                </LogoCustomer>
+            )}
 
             <div className="div-search">
                 <Search />
             </div>
 
-            <button className="orders">
-                <PiReceipt />
-                <Counter>
-                    <span>0</span>
-                    <p>Pedidos (0)</p>
-                </Counter>
-            </button>
-            <button className="logout" onClick={handleSignOut}>
+            {[USER_ROLE.ADMIN].includes(user.role) && (
+                <NewDish>Novo prato</NewDish>
+            )}
+
+            {[USER_ROLE.CUSTOMER].includes(user.role) && (
+                <Orders>
+                    <PiReceipt />
+                    <Counter>
+                        <span>0</span>
+                        <p>Pedidos (0)</p>
+                    </Counter>
+                </Orders>
+            )}
+
+            <Logout onClick={handleSignOut}>
                 <CiLogout />
-            </button>
+            </Logout>
         </Container>
     );
 }

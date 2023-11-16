@@ -21,9 +21,13 @@ export default createGlobalStyle`
         background-color: ${({ theme }) => theme.COLORS.DARK_400};
         font-family: 'poppins';
 
+        width: 100%;
+        /* height: 100vh; */
+
         color: ${({ theme }) => theme.COLORS.LIGHT_400};
 
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     a{
