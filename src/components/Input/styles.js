@@ -15,7 +15,11 @@ export const Container = styled.div`
         border: none;
         color: ${({ theme }) => theme.COLORS.LIGHT_300};
         font-size: 1.15rem;
-
+        
+        svg {
+            font-size: 1.7rem;
+            color: ${({ theme }) => theme.COLORS.LIGHT_400};
+        }
     }
 
     > input {
@@ -35,9 +39,5 @@ export const Container = styled.div`
         }
     }
 
-    > svg {
-        font-size: 1.7rem;
-        color: ${({ theme }) => theme.COLORS.LIGHT_400};
-    }
 `;
 
