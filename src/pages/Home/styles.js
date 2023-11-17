@@ -19,6 +19,9 @@ export const Content = styled.div`
     display: grid;
     grid-area: content;
 
+    overflow-y: auto;
+    overflow-x: hidden;
+
     padding: 44px 16px 0 36px;
 
     .banner{
@@ -26,7 +29,7 @@ export const Content = styled.div`
         height: 120px;
         background: linear-gradient(to right, ${({ theme }) => theme.COLORS.GRADIENTS_200_0}, ${({ theme }) => theme.COLORS.GRADIENTS_200_100});
 
-        /* margin: 44px 16px 0 36px; */
+        margin-bottom: 62px;
 
         display: flex;
         align-items: center;
@@ -66,6 +69,7 @@ export const Content = styled.div`
                 font-size: 18px;
                 min-width: 215px;
                 font-weight: 500;
+                
             }
     
             p{
@@ -76,6 +80,15 @@ export const Content = styled.div`
 
     }
 
+    .meals, .desserts, .drinks{
+        margin-bottom: 25px;
+        h1{
+            font-family: "Poppins", sans-serif;
+            font-size: 18px;
+
+            margin-bottom: 24px;
+        }
+    }
     
     .meals{
     }
@@ -84,21 +97,62 @@ export const Content = styled.div`
     .drinks{
     }
 
-    .keen-slider{
-        padding: 10px;
-        min-width: 300px;
-        max-width: 96vw;
-        overflow: hidden;
+    .navigation-wrapper {
+        position: relative;
+    }
+    .arrow {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        fill: #fff;
+        cursor: pointer;
     }
 
-    .keen-slider__slide{
-        background-color: white;
-        height: 200px;
-        color: black;
-        display: flex;
+    .arrow--left {
+        left: 5px;
+    }
 
+    .arrow--right {
+        left: auto;
+        right: 5px;
+    }
+
+    .keen-slider{
+        min-width: 150px;
+        max-width: 90vw;
+        /* overflow: hidden; */
+        height: 292px;
+
+    }
+    
+    
+    .keen-slider__slide{
+        min-width: 210px;
+        max-width: 210px;
+
+        height: 100%;
+        
+        display: flex;
         justify-content: center;
         align-items: center;
+        
+        /* margin-left: 16px; */
+        
+
+        box-sizing: border-box;
+
+    }
+
+    @media(min-width:${DEVICE_BREAKPOINTS.MD}){
+        .keen-slider{
+            max-width: 94vw;
+
+            height: 400px;
+        
+        }
     }
 
     @media(min-width:${DEVICE_BREAKPOINTS.LG}){
@@ -133,6 +187,18 @@ export const Content = styled.div`
             .foodsDesktop{
                 display: block;
             }
+        }
+        .keen-slider{
+            max-width: 95vw;
+
+            height: 462px;
+        
+        }
+    
+    
+        .keen-slider__slide{
+            min-width: 304px;
+            /* margin-right: 27px; */
         }
 
     }

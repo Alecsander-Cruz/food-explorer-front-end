@@ -19,6 +19,9 @@ export const Container = styled.div`
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
 
+    /* overflow-y: hidden; */
+    overflow-y: visible;
+
     &[data-menu-is-open="true"]{
         transform: translateX(0);
     }
