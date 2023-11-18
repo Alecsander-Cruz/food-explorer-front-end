@@ -1,6 +1,6 @@
 import { Container } from "./styles";
 
-export function Input({ icon: Icon, ...rest }) {
+export function Input({ type = "text", icon: Icon, ...rest }) {
     return (
         <Container>
             {Icon && (
@@ -8,7 +8,7 @@ export function Input({ icon: Icon, ...rest }) {
                     <Icon />
                 </button>
             )}
-            <input {...rest} />
+            <input type={type} {...rest} />
         </Container>
     );
 }

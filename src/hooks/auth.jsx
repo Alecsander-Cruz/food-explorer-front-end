@@ -51,7 +51,7 @@ function AuthProvider({ children }) {
 
             await api.put("/dishes", dish, { withCredentials: true });
 
-            localStorage.setItem("@foodexplorer:dish", JSON.stringify(dish));
+            // localStorage.setItem("@foodexplorer:dish", JSON.stringify(dish));
             setData({ dish });
             alert("Prato atualizado!");
         } catch (error) {

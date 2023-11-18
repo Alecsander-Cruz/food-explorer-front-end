@@ -29,6 +29,7 @@ import { api } from "../../services/api.js";
 
 import { SideMenu } from "../../components/SideMenu";
 import { Header } from "../../components/Header";
+import { BackButton } from "../../components/BackButton";
 import { Footer } from "../../components/Footer";
 import { IngredientTag } from "../../components/IngredientTag";
 
@@ -68,7 +69,7 @@ export function DishDetails() {
     }
 
     function handleGoBack() {
-        navigate("/");
+        navigate(-1);
     }
 
     useEffect(() => {
@@ -98,10 +99,7 @@ export function DishDetails() {
             {dish && (
                 <Content>
                     <LeftDiv>
-                        <Back onClick={handleGoBack}>
-                            <FaAngleLeft />
-                            <span>voltar</span>
-                        </Back>
+                        <BackButton onClick={handleGoBack} />
                         <Photo
                             src={getPhoto(dish)}
                             alt={`Imagem de ${dish.name}`}

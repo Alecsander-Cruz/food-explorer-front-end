@@ -30,7 +30,10 @@ export const Container = styled.button`
     }
 
     &:disabled{
-        opacity: 0.5;
+    background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    opacity: 0.8;
+        
     }
 
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}){

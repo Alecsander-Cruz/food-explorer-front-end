@@ -17,6 +17,10 @@ export function SideMenu({ menuIsOpen, onCloseMenu }) {
         signOut();
     }
 
+    function handleAddDish() {
+        navigate("/newdish");
+    }
+
     return (
         <Container data-menu-is-open={menuIsOpen}>
             <Header>
@@ -28,7 +32,7 @@ export function SideMenu({ menuIsOpen, onCloseMenu }) {
             <Nav>
                 <Search />
                 {[USER_ROLE.ADMIN].includes(user.role) && (
-                    <a href="#" data-menu-active="true">
+                    <a href="#" data-menu-active="true" onClick={handleAddDish}>
                         Novo Prato
                     </a>
                 )}

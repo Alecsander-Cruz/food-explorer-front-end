@@ -29,6 +29,10 @@ export function Header({ onOpenMenu }) {
         signOut();
     }
 
+    function handleNewDish() {
+        navigate("/newdish");
+    }
+
     return (
         <Container>
             <Menu onClick={onOpenMenu}>
@@ -57,7 +61,7 @@ export function Header({ onOpenMenu }) {
             </div>
 
             {[USER_ROLE.ADMIN].includes(user.role) && (
-                <NewDish>Novo prato</NewDish>
+                <NewDish onClick={handleNewDish}>Novo prato</NewDish>
             )}
 
             {[USER_ROLE.CUSTOMER].includes(user.role) && (
