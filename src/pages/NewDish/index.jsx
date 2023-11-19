@@ -16,10 +16,6 @@ import {
     Description
 } from "./styles";
 
-//  imagem placeholder para pratos que nao seja adicionada a foto
-import dishPhotoPlaceHolder from "../../assets/DishPlaceHolder.svg";
-
-import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -126,17 +122,22 @@ export function NewDish() {
             });
         }
 
-        // console.log(dish_id.data);
-
-        // const response = await api.get(`/dishes/${dish_id.data}`, {
-        //     withCredentials: true
-        // });
-
-        // console.log(response);
-
         alert("Prato criado com sucesso!");
 
         handleBack();
+    }
+
+    function showFileName(file) {
+        console.log(file);
+        if (file === null) {
+            return "Selecione imagem";
+        } else {
+            if (file) {
+                return file.name;
+            } else {
+                return setPhotoFile(null);
+            }
+        }
     }
 
     useEffect(() => {
@@ -154,8 +155,6 @@ export function NewDish() {
         }
     }, [name, category, ingredients, price, description, photoFile]);
 
-    useEffect(() => {}, [photoFile]);
-
     return (
         <Container>
             <SideMenu
@@ -172,9 +171,7 @@ export function NewDish() {
                             <span>Imagem do prato</span>
                             <label htmlFor="photo">
                                 <PiUploadSimple />
-                                {photoFile === null
-                                    ? "Selecione imagem"
-                                    : photoFile.name}
+                                {showFileName(photoFile)}
                                 <input
                                     type="file"
                                     id="photo"
@@ -186,6 +183,7 @@ export function NewDish() {
                         <Name>
                             <span>Nome</span>
                             <Input
+                                type="text"
                                 placeholder="Ex.: Salada Cesar"
                                 onChange={e => setName(e.target.value)}
                             />

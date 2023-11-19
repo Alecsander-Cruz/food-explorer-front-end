@@ -102,18 +102,25 @@ export const FourthDiv = styled.div`
 
     display: flex;
     justify-content: flex-end;
+    gap: 32px;
+
+    button:first-child{
+        background-color: ${({ theme }) => theme.COLORS.DARK_800}
+    }
     
     button{
         span{
-            color: ${({ theme }) => theme.COLORS.LIGHT_100};
+            color: ${({ theme }) => theme.COLORS.LIGHT_100}
         }
     }
+
     @media(min-width:${DEVICE_BREAKPOINTS.LG}){
         
         button{
             width: 20%;
 
         }
+
     }
 
 `
@@ -144,8 +151,6 @@ export const Photo = styled.div`
         font-family: "Poppins", sans-serif;
         font-size: 16px;
         color: ${({ theme }) => theme.COLORS.LIGHT_100};
-
-        overflow: hidden;
         
         
         svg{
@@ -260,8 +265,6 @@ export const Price = styled.div`
 
     gap: 16px;
     margin-bottom: 24px;
-
-    
 
 `
 export const Description = styled.div`

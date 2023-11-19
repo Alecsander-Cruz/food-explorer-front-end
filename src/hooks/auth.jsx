@@ -37,7 +37,7 @@ function AuthProvider({ children }) {
 
     async function updateDish({ dish, photoFile }) {
         try {
-            if (photoFile) {
+            if (photoFile !== null) {
                 const fileUploadForm = new FormData();
                 fileUploadForm.append("photo", photoFile);
 
@@ -49,16 +49,16 @@ function AuthProvider({ children }) {
                 dish.photo = response.data.photo;
             }
 
-            await api.put("/dishes", dish, { withCredentials: true });
+            await api.put(`/dishes/${dish.id}`, dish, {
+                withCredentials: true
+            });
 
-            // localStorage.setItem("@foodexplorer:dish", JSON.stringify(dish));
-            setData({ dish });
             alert("Prato atualizado!");
         } catch (error) {
             if (error.response) {
                 alert(error.response.data.message);
             } else {
-                alert("Não foi possível atualizar o prato");
+                alert(error);
             }
         }
     }

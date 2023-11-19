@@ -1,7 +1,6 @@
 import {
     Container,
     Content,
-    Back,
     LeftDiv,
     RightDiv,
     Photo,
@@ -21,7 +20,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { FiMinus, FiPlus } from "react-icons/fi";
-import { FaAngleLeft } from "react-icons/fa6";
 import { PiReceipt } from "react-icons/pi";
 
 import { useAuth } from "../../hooks/auth.jsx";
@@ -72,10 +70,13 @@ export function DishDetails() {
         navigate(-1);
     }
 
+    function handleEditDish() {
+        navigate(`/dish-edit/${dish.id}`);
+    }
+
     useEffect(() => {
         if (dish) {
-            setPrice(count * Number(dish.price.replace(",", ".")));
-            // console.log(typeof count.toFixed(2));
+            setPrice(count * dish.price);
         }
     }, [count]);
 
@@ -133,21 +134,17 @@ export function DishDetails() {
                                 </Quantity>
                                 <Add>
                                     <PiReceipt />
-                                    <p>
-                                        {`pedir \u00B7 R$ ${
-                                            price !== 0
-                                                ? price
-                                                      .toFixed(2)
-                                                      .replace(".", ",")
-                                                : dish.price
-                                        }`}
-                                    </p>
+                                    <p>{`pedir \u00B7 R$ ${
+                                        price ? price : dish.price
+                                    }`}</p>
                                 </Add>
                             </LastDiv>
                         )}
                         {[USER_ROLE.ADMIN].includes(user.role) && (
                             <LastDiv>
-                                <Edit>Editar prato</Edit>
+                                <Edit onClick={handleEditDish}>
+                                    Editar prato
+                                </Edit>
                             </LastDiv>
                         )}
                     </RightDiv>

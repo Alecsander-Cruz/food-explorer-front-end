@@ -47,10 +47,14 @@ export function DishCard({ data, ...rest }) {
         navigate(`/dish-details/${dishId}`);
     }
 
+    function handleDishEdit(dishId) {
+        navigate(`/dish-edit/${dishId}`);
+    }
+
     return (
         <Container {...rest}>
             {[USER_ROLE.ADMIN].includes(user.role) && (
-                <LikeOrEdit>
+                <LikeOrEdit onClick={() => handleDishEdit(data.id)}>
                     <PiPencilSimple />
                 </LikeOrEdit>
             )}

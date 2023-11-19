@@ -94,107 +94,78 @@ export function Home() {
                 </section>
                 <section className="meals">
                     <h1>Refeições</h1>
-                    {dishes && (
-                        <div ref={sliderRef} className="keen-slider">
-                            {dishes.map(dish => {
-                                if (dish.category === "refeicao") {
-                                    return (
-                                        <div
-                                            className="keen-slider__slide"
-                                            key={String(dish.id)}
-                                        >
-                                            <DishCard
+                    {dishes &&
+                        (dishes.length !== 0 ? (
+                            <div ref={sliderRef} className="keen-slider">
+                                {dishes.map(dish => {
+                                    if (dish.category === "refeicao") {
+                                        return (
+                                            <div
+                                                className="keen-slider__slide"
                                                 key={String(dish.id)}
-                                                data={dish}
-                                            />
-                                        </div>
-                                    );
-                                }
-                            })}
-                            <div className="keen-slider__slide" key={String(1)}>
-                                <DishCard
-                                    key={String(1)}
-                                    data={{
-                                        id: 1,
-                                        name: "Ovo com Kitute",
-                                        category: "refeicao",
-                                        price: "15,00",
-                                        description: "ovo frito com kitute"
-                                    }}
-                                />
+                                            >
+                                                <DishCard
+                                                    key={String(dish.id)}
+                                                    data={dish}
+                                                />
+                                            </div>
+                                        );
+                                    }
+                                })}
                             </div>
-                            <div className="keen-slider__slide" key={String(2)}>
-                                <DishCard
-                                    key={String(2)}
-                                    data={{
-                                        id: 2,
-                                        name: "Ovo com Kitute",
-                                        category: "refeicao",
-                                        price: "15,00",
-                                        description: "ovo frito com kitute",
-                                        photo: null
-                                    }}
-                                />
-                            </div>
-                            <div className="keen-slider__slide" key={String(3)}>
-                                <DishCard
-                                    key={String(3)}
-                                    data={{
-                                        id: 3,
-                                        name: "Ovo com Kitute",
-                                        category: "refeicao",
-                                        price: "15,00",
-                                        description: "ovo frito com kitute",
-                                        photo: null
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    )}
+                        ) : (
+                            <h1>Ainda não existe nenhum prato cadastrado!</h1>
+                        ))}
                 </section>
                 <section className="desserts">
                     <h1>Sobremesas</h1>
-                    {dishes && (
-                        <div ref={sliderRef} className="keen-slider">
-                            {dishes.map(dish => {
-                                if (dish.category === "sobremesa") {
-                                    return (
-                                        <div
-                                            className="keen-slider__slide"
-                                            key={String(dish.id)}
-                                        >
-                                            <DishCard
+                    {dishes &&
+                        (dishes.length !== 0 ? (
+                            <div ref={sliderRef} className="keen-slider">
+                                {dishes.map(dish => {
+                                    if (dish.category === "sobremesa") {
+                                        return (
+                                            <div
+                                                className="keen-slider__slide"
                                                 key={String(dish.id)}
-                                                data={dish}
-                                            />
-                                        </div>
-                                    );
-                                }
-                            })}
-                        </div>
-                    )}
+                                            >
+                                                <DishCard
+                                                    key={String(dish.id)}
+                                                    data={dish}
+                                                />
+                                            </div>
+                                        );
+                                    }
+                                })}
+                            </div>
+                        ) : (
+                            <h1>Ainda não existe nenhum prato cadastrado!</h1>
+                        ))}
                 </section>
                 <section className="drinks">
                     <h1>Bebidas</h1>
-                    {dishes && (
-                        <div ref={sliderRef} className="keen-slider">
-                            {dishes.map(dish => {
-                                if (dish.category === "bebida") {
-                                    return (
-                                        <div
-                                            className="keen-slider__slide"
-                                            key={String(dish.id)}
-                                        >
-                                            <DishCard
+                    {dishes &&
+                        (dishes.length !== 0 ? (
+                            <div ref={sliderRef} className="keen-slider">
+                                {dishes.map(dish => {
+                                    if (dish.category === "bebida") {
+                                        return (
+                                            <div
+                                                className="keen-slider__slide"
                                                 key={String(dish.id)}
-                                                data={dish}
-                                            />
-                                        </div>
-                                    );
-                                }
-                            })}
-                        </div>
-                    )}
+                                            >
+                                                <DishCard
+                                                    key={String(dish.id)}
+                                                    data={dish}
+                                                />
+                                            </div>
+                                        );
+                                    }
+                                })}
+                            </div>
+                        ) : (
+                            <h1>Ainda não existe nenhum prato cadastrado!</h1>
+                        ))}
                 </section>
             </Content>
             <FixedFooter>
