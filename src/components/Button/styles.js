@@ -33,6 +33,7 @@ export const Container = styled.button`
     background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
     opacity: 0.8;
+    cursor: not-allowed;
         
     }
 
