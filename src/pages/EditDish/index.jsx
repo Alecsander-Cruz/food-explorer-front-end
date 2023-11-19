@@ -57,8 +57,7 @@ export function EditDish() {
     const [description, setDescription] = useState();
 
     const [ingredients, setIngredients] = useState([]);
-    const [oldIngredients, setOldIngredients] = useState([]);
-    const [ingredientsToBeUpdated, setIngredientsToBeUpdated] = useState([]);
+    const [newIngredients, setNewIngredients] = useState([]);
     const [newIngredient, setNewIngredient] = useState("");
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -69,27 +68,15 @@ export function EditDish() {
     // ----- INGREDIENTS -----
 
     function handleAddIngredient() {
-        setIngredientsToBeUpdated(prevState => [...prevState, newIngredient]);
+        setNewIngredients(prevState => [...prevState, newIngredient]);
         setNewIngredient("");
     }
 
     function handleRemoveIngredient(deleted) {
-        setIngredientsToBeUpdated(prevState =>
+        setNewIngredients(prevState =>
             prevState.filter(ingredient => ingredient !== deleted)
         );
     }
-
-    useEffect(() => {
-        setOldIngredients(() => {
-            const ingredientsNames = ingredients.map(ingredient => {
-                return ingredient.name;
-            });
-            return ingredientsNames;
-        });
-        setTimeout(() => {
-            setIngredientsToBeUpdated(oldIngredients);
-        }, 50);
-    }, [ingredients]);
 
     // ----- INGREDIENTS -----
 
@@ -139,7 +126,7 @@ export function EditDish() {
             return alert("Categoria vazia!");
         }
 
-        if (ingredients.length === 0) {
+        if (newIngredients.length === 0) {
             return alert(
                 "Nenhum Ingrediente foi adicionado, por favor, adicione pelo menos um ingrediente!"
             );
@@ -164,12 +151,11 @@ export function EditDish() {
         newDish.category = category;
         newDish.price = price;
         newDish.description = description;
-        newDish.ingredients = ingredientsToBeUpdated;
+        newDish.ingredients = newIngredients;
 
         try {
             await updateDish({ dish: newDish, photoFile });
 
-            alert("Prato atualizado com sucesso!");
             handleBack();
         } catch (error) {
             if (error.response) {
@@ -199,21 +185,23 @@ export function EditDish() {
         setCategory(dish.category);
         setPrice(dish.price);
         setDescription(dish.description);
-
-        const allIngredients = dish.ingredients;
-
-        const filteredIngredients = allIngredients.filter(
-            ingredient => ingredient.dish_id === dish.id
-        );
-
-        setIngredients(filteredIngredients);
+        setIngredients(dish.ingredients);
     }, [dish]);
+
+    useEffect(() => {
+        setNewIngredients(() => {
+            const ingredientsNames = ingredients.map(ingredient => {
+                return ingredient.name;
+            });
+            return ingredientsNames;
+        });
+    }, [ingredients]);
 
     useEffect(() => {
         if (
             name &&
             category &&
-            ingredientsToBeUpdated.length > 0 &&
+            newIngredients.length > 0 &&
             price &&
             description
         ) {
@@ -221,7 +209,7 @@ export function EditDish() {
         } else {
             setButtonDisabled(true);
         }
-    }, [name, category, ingredientsToBeUpdated, price, description]);
+    }, [name, category, newIngredients, price, description]);
 
     return (
         <Container>
@@ -233,7 +221,7 @@ export function EditDish() {
             <Content>
                 <BackButton onClick={handleBack} />
                 <Title>Editar Prato</Title>
-                {dish && (
+                {dish !== null && (
                     <Form>
                         <FirstDiv>
                             <Photo>
@@ -292,21 +280,19 @@ export function EditDish() {
                             <Ingredients>
                                 <span>Ingredientes</span>
                                 <section>
-                                    {ingredientsToBeUpdated.map(
-                                        (ingredient, index) => {
-                                            return (
-                                                <IngredientItem
-                                                    key={String(index)}
-                                                    value={ingredient}
-                                                    onClick={() =>
-                                                        handleRemoveIngredient(
-                                                            ingredient
-                                                        )
-                                                    }
-                                                />
-                                            );
-                                        }
-                                    )}
+                                    {newIngredients.map((ingredient, index) => {
+                                        return (
+                                            <IngredientItem
+                                                key={String(index)}
+                                                value={ingredient}
+                                                onClick={() =>
+                                                    handleRemoveIngredient(
+                                                        ingredient
+                                                    )
+                                                }
+                                            />
+                                        );
+                                    })}
                                     <IngredientItem
                                         isNew
                                         placeholder="Adicionar"
