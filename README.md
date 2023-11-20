@@ -3,6 +3,14 @@
 
 - repositório do back-end [food-exlorer-back-end](https://github.com/Alecsander-Cruz/food-explorer-back-end/)
 
+- O banco de dados já está populado com dois usuários:
+    - admin:
+        - email: admin@email.com
+        - senha: 123456
+  - usuário:
+      - email: usuario@email.com
+      - senha: 123456 
+
 ## Requisitos do Front-end:
 
 -   [x] Implementação das telas de login, página principal, página de detalhes do prato, e outras conforme o layout disponibilizado no Figma.
