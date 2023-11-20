@@ -1,5 +1,7 @@
 # food-explorer-front-end
-Front-end do Flood Explorer, aplicação desenvolvida no desafio final do curso Explorer da Rocketseat
+### Front-end do Flood Explorer, aplicação desenvolvida no desafio final do curso Explorer da Rocketseat
+
+- repositório do back-end [food-exlorer-back-end](https://github.com/Alecsander-Cruz/food-explorer-back-end/)
 
 ## Requisitos do Front-end:
 
@@ -51,7 +53,8 @@ Front-end do Flood Explorer, aplicação desenvolvida no desafio final do curso 
 
 
 ## :link:[Deploy do projeto](https://alecsander-cruz-food-explorer-front.netlify.app/)
-    - Recomendado testar o projeto localmente, pois o deploy do Front e Back estão muito lentos e bugando a visualização...
+
+- Recomendado testar o projeto localmente, pois o deploy do Front e Back estão muito lentos e bugando a visualização...
 
 
 ## Previews das telas mobile:
