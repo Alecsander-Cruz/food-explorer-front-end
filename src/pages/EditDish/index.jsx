@@ -104,13 +104,17 @@ export function EditDish() {
     // ----- PHOTO -----
 
     function handleBack() {
-        navigate(-1);
+        navigate("/");
     }
 
     async function handleRemove() {
         const confirm = window.confirm("Deseja realmente remover esta nota?");
 
         if (confirm) {
+            await api.delete(`/dishes/photo/${params.id}`, {
+                withCredentials: true
+            });
+
             await api.delete(`/dishes/${params.id}`, { withCredentials: true });
         }
 
