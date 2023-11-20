@@ -14,8 +14,16 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
 import { api } from "../../services/api";
+import { useSearchParams } from "react-router-dom";
 
 export function Home() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [search, setSearch] = useState(searchParams.get("search"));
+
+    function handleSetSearch(data) {
+        setSearch(data);
+    }
+
     // SLIDER
     const [sliderRef] = useKeenSlider({
         loop: false,
@@ -41,36 +49,94 @@ export function Home() {
         }
     });
 
+    function callResizeEvent() {
+        window.dispatchEvent(new Event("resize"));
+    }
+
     useEffect(() => {
         setTimeout(() => {
-            window.dispatchEvent(new Event("resize"));
-        }, 100);
-    }, []);
+            callResizeEvent();
+        }, 300);
+    }, [search]);
 
     // SLIDER
 
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const [dishes, setDishes] = useState([]);
 
-    useEffect(() => {
-        async function fetchDishes() {
+    async function fetchDishes() {
+        if (search === null) {
             const response = await api.get(`/dishes?name&ingredients`, {
                 withCredentials: true
             });
             setDishes(response.data);
-        }
+        } else {
+            const responseName = await api.get(
+                `/dishes?name=${search}&ingredients`,
+                {
+                    withCredentials: true
+                }
+            );
 
-        fetchDishes();
-    }, [dishes]);
+            const responseIngredient = await api.get(
+                `/dishes?name&ingredients=${search}`,
+                {
+                    withCredentials: true
+                }
+            );
+
+            const arrayIngredientsId = responseIngredient.data.map(
+                ingredient => ingredient.id
+            );
+
+            const fetchedIngredients = [];
+
+            for (let i = 0; i < arrayIngredientsId.length; i++) {
+                const response = await api.get(
+                    `/dishes/${arrayIngredientsId[i]}`,
+                    { withCredentials: true }
+                );
+
+                fetchedIngredients.push(response.data);
+            }
+
+            let allDishes = [...responseName.data];
+            const allDishesId = allDishes.map(dish => dish.id);
+
+            const intersec = fetchedIngredients.filter(
+                dish => !allDishesId.includes(dish.id)
+            );
+
+            allDishes = [...allDishes, ...intersec];
+
+            setDishes(allDishes);
+        }
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            fetchDishes();
+        }, 300);
+    }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            fetchDishes();
+        }, 100);
+    }, [search]);
 
     return (
         <Container>
             <SideMenu
                 menuIsOpen={menuIsOpen}
                 onCloseMenu={() => setMenuIsOpen(false)}
+                handleSearchData={handleSetSearch}
             />
             <FixedHeader>
-                <Header onOpenMenu={() => setMenuIsOpen(true)} />
+                <Header
+                    onOpenMenu={() => setMenuIsOpen(true)}
+                    handleSearchData={handleSetSearch}
+                />
             </FixedHeader>
             <Content>
                 <section className="banner">
@@ -95,7 +161,8 @@ export function Home() {
                 <section className="meals">
                     <h1>Refeições</h1>
                     {dishes &&
-                        (dishes.length !== 0 ? (
+                        (dishes.filter(dish => dish.category === "refeicao")
+                            .length !== 0 ? (
                             <div ref={sliderRef} className="keen-slider">
                                 {dishes.map(dish => {
                                     if (dish.category === "refeicao") {
@@ -114,13 +181,14 @@ export function Home() {
                                 })}
                             </div>
                         ) : (
-                            <h1>Ainda não existe nenhum prato cadastrado!</h1>
+                            <h1>Nenhuma refeição foi encontrada</h1>
                         ))}
                 </section>
                 <section className="desserts">
                     <h1>Sobremesas</h1>
                     {dishes &&
-                        (dishes.length !== 0 ? (
+                        (dishes.filter(dish => dish.category === "sobremesa")
+                            .length !== 0 ? (
                             <div ref={sliderRef} className="keen-slider">
                                 {dishes.map(dish => {
                                     if (dish.category === "sobremesa") {
@@ -139,13 +207,14 @@ export function Home() {
                                 })}
                             </div>
                         ) : (
-                            <h1>Ainda não existe nenhum prato cadastrado!</h1>
+                            <h1>Nenhuma sobremesa foi encontrada!</h1>
                         ))}
                 </section>
                 <section className="drinks">
                     <h1>Bebidas</h1>
                     {dishes &&
-                        (dishes.length !== 0 ? (
+                        (dishes.filter(dish => dish.category === "bebida")
+                            .length !== 0 ? (
                             <div ref={sliderRef} className="keen-slider">
                                 {dishes.map(dish => {
                                     if (dish.category === "bebida") {
@@ -164,7 +233,7 @@ export function Home() {
                                 })}
                             </div>
                         ) : (
-                            <h1>Ainda não existe nenhum prato cadastrado!</h1>
+                            <h1>Nenhuma bebida foi encontrada!</h1>
                         ))}
                 </section>
             </Content>

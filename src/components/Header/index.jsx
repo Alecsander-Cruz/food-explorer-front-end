@@ -19,10 +19,19 @@ import { useNavigate } from "react-router-dom";
 import { Search } from "../Search";
 
 import { USER_ROLE } from "../../utils/roles.js";
+import { useEffect, useState } from "react";
 
-export function Header({ onOpenMenu }) {
+export function Header({ onOpenMenu, handleSearchData }) {
     const { signOut, user } = useAuth();
     const navigate = useNavigate();
+
+    const [search, setSearch] = useState("");
+
+    function handleLogo() {
+        setSearch("");
+        navigate("/");
+        location.reload();
+    }
 
     function handleSignOut() {
         navigate("/");
@@ -33,6 +42,17 @@ export function Header({ onOpenMenu }) {
         navigate("/newdish");
     }
 
+    function handleSetSearch(data) {
+        setSearch(data);
+    }
+
+    useEffect(() => {
+        handleSetSearch(search);
+        if (handleSearchData) {
+            handleSearchData(search);
+        }
+    }, [search]);
+
     return (
         <Container>
             <Menu onClick={onOpenMenu}>
@@ -40,7 +60,7 @@ export function Header({ onOpenMenu }) {
             </Menu>
 
             {[USER_ROLE.ADMIN].includes(user.role) && (
-                <LogoAdmin>
+                <LogoAdmin onClick={handleLogo}>
                     <MdHexagon />
                     <div>
                         <strong>food explorer</strong>
@@ -50,14 +70,14 @@ export function Header({ onOpenMenu }) {
             )}
 
             {[USER_ROLE.CUSTOMER].includes(user.role) && (
-                <LogoCustomer>
+                <LogoCustomer onClick={handleLogo}>
                     <MdHexagon />
                     <strong>food explorer</strong>
                 </LogoCustomer>
             )}
 
             <div className="div-search">
-                <Search />
+                <Search handleSearchData={handleSetSearch} />
             </div>
 
             {[USER_ROLE.ADMIN].includes(user.role) && (

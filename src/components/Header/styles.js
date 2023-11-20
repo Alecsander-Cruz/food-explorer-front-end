@@ -102,13 +102,18 @@ export const Counter = styled.div`
     }
 `
 
-export const LogoAdmin = styled.div`
+export const LogoAdmin = styled.button`
+
+    border: none;
+    background: transparent;
+    gap: 8px;
 
     min-width: 170px;
     display: flex;
     justify-content: flex-start;
-
     justify-self: center;
+
+
 
     /* position: relative; */
 
@@ -168,7 +173,11 @@ export const LogoAdmin = styled.div`
     
 `
 
-export const LogoCustomer = styled.div`
+export const LogoCustomer = styled.button`
+
+    border: none;
+    background: transparent;
+    gap: 8px;
     
     min-width: 190px;
     display: flex;
