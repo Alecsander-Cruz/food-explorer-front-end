@@ -18,7 +18,7 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 
 import { USER_ROLE } from "../../utils/roles";
 import { useAuth } from "../../hooks/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 
@@ -27,6 +27,7 @@ import dishPhotoPlaceHolder from "../../assets/DishPlaceHolder.svg";
 export function DishCard({ data, ...rest }) {
     const { user } = useAuth();
     const [count, setCount] = useState(1);
+    const [price, setPrice] = useState(data ? data.price : 0);
     const navigate = useNavigate();
 
     function getPhoto(dish) {
@@ -40,6 +41,7 @@ export function DishCard({ data, ...rest }) {
     function handleQuantityDecrease() {
         if (count > 1) {
             setCount(count => count - 1);
+            setPrice;
         }
     }
 
@@ -50,6 +52,12 @@ export function DishCard({ data, ...rest }) {
     function handleDishEdit(dishId) {
         navigate(`/dish-edit/${dishId}`);
     }
+
+    useEffect(() => {
+        if (data) {
+            setPrice(count * data.price);
+        }
+    }, [count]);
 
     return (
         <Container {...rest}>
@@ -70,7 +78,7 @@ export function DishCard({ data, ...rest }) {
                 </Name>
                 <Description>{data.description}</Description>
 
-                <Price>R$ {data.price}</Price>
+                <Price>R$ {price ? price : data.price}</Price>
             </DishDetails>
 
             {[USER_ROLE.CUSTOMER].includes(user.role) && (
