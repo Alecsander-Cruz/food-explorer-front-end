@@ -128,5 +128,16 @@
 ![desktop-edit-dish](https://github.com/Alecsander-Cruz/food-explorer-front-end/assets/17745018/29b383e5-99c3-410b-8f1e-614dd3616aa4)
 
 
+## Próximos passos:
+-  [ ] Inclusão de itens no carrinho, clicando no botão incluir. Já a quantidade é controlada pelos botões “-” e “+”.
 
+-  [ ] Tela de pedido, ao clicar no botão de pedidos, onde o usuário poderá ver o seu pedido, a soma e os métodos de pagamento.
+
+-  [ ] Exclusão de prato do carrinho e atualização do valor total.
+
+-  [ ] Marcar prato como favorito ao clicar no ícone de coração.
+
+-  [ ] Admin poderá visualizar e controlar o status de cada pedido, por um campo do tipo select. Os pedidos irão aparecer em uma tabela ao clicar em Pedidos.
+
+-  [ ] Versão Light Mode do projeto.
 
