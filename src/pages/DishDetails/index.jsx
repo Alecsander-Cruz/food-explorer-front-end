@@ -67,7 +67,7 @@ export function DishDetails() {
     }
 
     function handleGoBack() {
-        navigate(-1);
+        navigate("/");
     }
 
     function handleEditDish() {
