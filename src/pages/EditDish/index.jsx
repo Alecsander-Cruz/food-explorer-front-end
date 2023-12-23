@@ -108,7 +108,7 @@ export function EditDish() {
     }
 
     async function handleRemove() {
-        const confirm = window.confirm("Deseja realmente remover este prato?");
+        const confirm = window.confirm("Deseja realmente remover esta nota?");
 
         if (confirm) {
             await api.delete(`/dishes/photo/${params.id}`, {
